@@ -113,8 +113,10 @@ void vrpn_Server_FreeD::mainloop()
     std::string pos_msg;
     {
         char pos_msg_buf[128];
-        snprintf(pos_msg_buf, sizeof(pos_msg_buf), "ID=%.3d|Pan=%8.4f|Tilt=%8.4f|Roll=%8.4f|X=%8.4f|Y=%8.4f|Z=%8.4f|Zoom=%5d|Focus=%5d\r",
-            d1.ID, d1.Pan, d1.Tilt, d1.Roll, d1.X, d1.Y, d1.Z, d1.Zoom, d1.Focus);
+        const char *syms_array = "+|/-\\";
+        static int syms_idx = 0;
+        snprintf(pos_msg_buf, sizeof(pos_msg_buf), " [%c] ID=%.3d|Pan=%9.4f|Tilt=%9.4f|Roll=%9.4f|X=%9.4f|Y=%9.4f|Z=%9.4f|Zoom=%5d|Focus=%5d\r",
+            syms_array[++syms_idx % 5], d1.ID, d1.Pan, d1.Tilt, d1.Roll, d1.X, d1.Y, d1.Z, d1.Zoom, d1.Focus);
         pos_msg = pos_msg_buf;
     }
     std::cerr << pos_msg;

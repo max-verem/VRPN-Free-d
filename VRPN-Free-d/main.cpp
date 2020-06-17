@@ -37,6 +37,8 @@ int main(int argc, char *argv[])
 {
     int vrpn_listen = 0, free_d_listen = 0;
 
+    std::cerr << PROJECTNAME << " Compiled on " __DATE__ << std::endl;
+
     if (argc != 3 && argc != 2)
     {
         std::cerr << "Error! Not enough argumements!" << std::endl;
