@@ -7,15 +7,20 @@
 #include <quat.h>
 #include <vrpn_Connection.h>
 
+#include "vrpn_Analog_FreeD.h"
+#include "vrpn_Tracker_FreeD.h"
 
 class vrpn_Server_FreeD {
 public:
-    vrpn_Server_FreeD();
-	~vrpn_Server_FreeD();
-	void mainloop();
+    SOCKET s;
+    vrpn_Server_FreeD(int _vrpn_listen, int _free_d_listen);
+    ~vrpn_Server_FreeD();
+    void mainloop();
 
 private:
-	std::unique_ptr<vr::IVRSystem> vr{ nullptr };
-	vrpn_Connection *connection;
+    vrpn_Connection *connection;
+    vrpn_Analog_FreeD* anl;
+    vrpn_Tracker_FreeD* trk;
+
 };
 

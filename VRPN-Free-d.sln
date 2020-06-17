@@ -4,6 +4,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VRPN-Free-d", "VRPN-Free-d\VRPN-Free-d.vcxproj", "{F02B042C-A632-499B-9A97-6303275F41FF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{7EE1DB03-16A5-4465-9164-061BE0C88B8C} = {7EE1DB03-16A5-4465-9164-061BE0C88B8C}
+		{0C16E98C-A372-4E58-990D-EE276B32644E} = {0C16E98C-A372-4E58-990D-EE276B32644E}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vrpn", "submodules\vrpn\vrpn.vcxproj", "{7EE1DB03-16A5-4465-9164-061BE0C88B8C}"
 EndProject

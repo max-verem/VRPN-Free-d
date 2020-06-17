@@ -1,5 +1,7 @@
 #include <windows.h>
 #include <memory>
+#include <iostream>
+#include <string>
 #include "vrpn_Server_FreeD.h"
 
 static volatile int done = 0;
@@ -31,11 +33,32 @@ BOOL WINAPI handleConsoleSignalsWin(DWORD signaltype)
 }
 #endif
 
-int main(int argc, char *argv[]) {
-    server = std::make_unique<vrpn_Server_FreeD>();
-    while (!done) {
+int main(int argc, char *argv[])
+{
+    int vrpn_listen = 0, free_d_listen = 0;
+
+    if (argc != 3 && argc != 2)
+    {
+        std::cerr << "Error! Not enough argumements!" << std::endl;
+        std::cerr << "Usage:" << std::endl;
+        std::cerr << "    " << argv[0] << " [<vrpn tcp port>] <free-d udp listen port>" << std::endl;
+        return 1;
+    }
+
+    if (argc == 2)
+    {
+        vrpn_listen = vrpn_DEFAULT_LISTEN_PORT_NO;
+        free_d_listen = atoi(argv[1]);
+    }
+    else
+    {
+        vrpn_listen = atoi(argv[1]);;
+        free_d_listen = atoi(argv[2]);
+    }
+
+    server = std::make_unique<vrpn_Server_FreeD>(vrpn_listen, free_d_listen);
+    while (!done && server->s) {
         server->mainloop();
-        vrpn_SleepMsecs(16);
     }
     server.reset(nullptr);
     return 0;
