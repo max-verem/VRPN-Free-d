@@ -18,6 +18,8 @@ Recent built was made with Visual Studio 2017. Building procedure is simple:
 
 1. Setup streaming to your host of Free-d data from camera or Simulator (see a last page of documentation at https://disruptar.com/downloads/) [data_streaming_simulator.png]
 
+![simulator](/data_streaming_simulator.png?raw=true "simulator")
+
 2. run compiled binary with arguments:
 ```
 VRPN-Free-d.exe 3884 11111
