@@ -24,9 +24,9 @@ void vrpn_Tracker_FreeD::update(FreeD_D1_t* src)
     // rotation
     q_from_euler(d_quat,
         PI * src->Pan / 180.0,      // double yaw,
-        PI * src->Tilt / 180.0,     // double pitch,
-        PI * src->Roll / 180.0      // double roll
-    );
+        PI * src->Roll / 180.0,      // double roll
+        PI * src->Tilt / 180.0     // double pitch,
+        );
 
     // Pack message
     vrpn_gettimeofday(&timestamp, NULL);
