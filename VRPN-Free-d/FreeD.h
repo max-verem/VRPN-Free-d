@@ -25,6 +25,7 @@ typedef struct
 } FreeD_D1_t;
 
 int FreeD_D1_unpack(unsigned char *buf, int len, FreeD_D1_t* dst);
+int FreeD_D1_pack(unsigned char *buf, int len, FreeD_D1_t* src);
 
 #ifdef __cplusplus
 };

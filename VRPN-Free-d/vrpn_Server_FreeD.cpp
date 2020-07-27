@@ -110,6 +110,15 @@ void vrpn_Server_FreeD::mainloop()
         return;
     }
 
+    /* do a test of packing */
+    if (1)
+    {
+        unsigned char test[FREE_D_D1_PACKET_SIZE];
+        FreeD_D1_pack(test, FREE_D_D1_PACKET_SIZE, &d1);
+        if(memcmp(test, buf, FREE_D_D1_PACKET_SIZE))
+            std::cerr << "FreeD_D1_pack failed!" << std::endl;
+    }
+
     std::string pos_msg;
     {
         char pos_msg_buf[128];
