@@ -1,6 +1,9 @@
 # VRPN-Free-d
 VRPN server for Free-d source data provided by UDP stream.
 
+# Binaries
+Latest build available at http://research.m1stereo.tv/ue/VRPN-Free-d.exe.7z
+
 # Building
 Recent built was made with Visual Studio 2017. Building procedure is simple:
 1. get the sources with git
