@@ -96,6 +96,9 @@ int FreeD_D1_unpack(unsigned char *buf, int len, FreeD_D1_t* dst)
 
 int FreeD_D1_pack(unsigned char *buf, int len, FreeD_D1_t* src)
 {
+    int i;
+    unsigned char cs = 0x40;
+
     if (len < FREE_D_D1_PACKET_SIZE)
         return -EINVAL;
 
@@ -116,7 +119,10 @@ int FreeD_D1_pack(unsigned char *buf, int len, FreeD_D1_t* src)
     buf[26] = src->Spare[0];
     buf[27] = src->Spare[1];
 
-    buf[28] = 0;
+    for (i = 0; i < (FREE_D_D1_PACKET_SIZE - 1); i++)
+        cs -= buf[i];
+
+    buf[28] = cs;
 
     return 0;
 }
