@@ -19,6 +19,8 @@ vrpn_Server_FreeD::vrpn_Server_FreeD(int vrpn_listen, int free_d_listen): s(0), 
 {
     int r;
 
+    last = { 0, 0 };
+
     // init winsock
     WSADATA wsaData;
     r = WSAStartup
@@ -121,11 +123,21 @@ void vrpn_Server_FreeD::mainloop()
 
     std::string pos_msg;
     {
+        int delta;
+        struct timeval now;
         char pos_msg_buf[128];
         const char *syms_array = "+|/-\\";
         static int syms_idx = 0;
-        snprintf(pos_msg_buf, sizeof(pos_msg_buf), " [%c] ID=%.3d|Pan=%9.4f|Tilt=%9.4f|Roll=%9.4f|X=%9.4f|Y=%9.4f|Z=%9.4f|Zoom=%5d|Focus=%5d\r",
-            syms_array[++syms_idx % 5], d1.ID, d1.Pan, d1.Tilt, d1.Roll, d1.X, d1.Y, d1.Z, d1.Zoom, d1.Focus);
+
+        vrpn_gettimeofday(&now, NULL);
+        if (!last.tv_sec && !last.tv_usec)
+            last = now;
+        delta = (now.tv_sec - last.tv_sec) * 1000 + (now.tv_usec - last.tv_usec) / 1000;
+        last = now;
+
+        snprintf(pos_msg_buf, sizeof(pos_msg_buf), "%5d [%c] ID=%.3d|Pan=%8.3f|Tilt=%8.3f|Roll=%8.3f|X=%8.3f|Y=%9.4f|Z=%8.3f|Zoom=%5d|Focus=%5d\r",
+            delta, syms_array[++syms_idx % 5], d1.ID, d1.Pan, d1.Tilt, d1.Roll, d1.X, d1.Y, d1.Z, d1.Zoom, d1.Focus);
+
         pos_msg = pos_msg_buf;
     }
     std::cerr << pos_msg;

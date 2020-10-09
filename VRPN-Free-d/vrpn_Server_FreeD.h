@@ -13,6 +13,7 @@
 class vrpn_Server_FreeD {
 public:
     SOCKET s;
+    struct timeval last;
     vrpn_Server_FreeD(int _vrpn_listen, int _free_d_listen);
     ~vrpn_Server_FreeD();
     void mainloop();
