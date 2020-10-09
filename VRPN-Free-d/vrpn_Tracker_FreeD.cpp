@@ -17,9 +17,9 @@ vrpn_Tracker_FreeD::vrpn_Tracker_FreeD(const std::string& name, vrpn_Connection*
 void vrpn_Tracker_FreeD::update(FreeD_D1_t* src)
 {
     // position
-    vrpn_Tracker::pos[0] = src->X;
-    vrpn_Tracker::pos[1] = src->Y;
-    vrpn_Tracker::pos[2] = src->Z;
+    vrpn_Tracker::pos[0] = src->X / 1000.0;
+    vrpn_Tracker::pos[1] = src->Y / 1000.0;
+    vrpn_Tracker::pos[2] = src->Z / 1000.0;
 
     // rotation
     q_from_euler(d_quat,
